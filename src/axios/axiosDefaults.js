@@ -9,11 +9,21 @@ axios.defaults.withXSRFToken = true;
 function verifyServerAvailability(){
     return axios.get('/api/server_state').then((res) => {
         if(res.status == 200){
-            return true;
+            return {
+                State: true,
+                Message: 'Service Running'
+            };
         }
     }).catch(() => {
-        return false;
+        return {
+            State: false,
+            Message: 'Service Under Maintenance'
+        };
     })
 }
 
-export {verifyServerAvailability}
+function Login(){
+    console.log("Loggin In")
+}
+
+export { verifyServerAvailability, Login}
