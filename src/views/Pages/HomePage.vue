@@ -26,7 +26,7 @@
                         <button @click="Login" class="bg-green-300 p-2 rounded-md shadow-md hover:bg-green-600 duration-200" :disabled="!ServerState" >Login</button>
                     </div>
                     <div class="mt-3">
-                        <p class="text-slate-500 text-sm">Don't have an account yet? <a class="text-lime-600" href="#">Register Now!</a></p>
+                        <p class="text-slate-500 text-sm">Don't have an account yet? <router-link to="/register" class="text-lime-600">Register Now!</router-link> </p>
                     </div>
                 </div>
             </div>
@@ -37,7 +37,7 @@
 </template>
 <script setup>
 import {ref} from 'vue';
-import { UserIcon, LockClosedIcon } from '@heroicons/vue/24/outline';
+import { UserIcon, LockClosedIcon } from '@heroicons/vue/outline';
 import {verifyServerAvailability, Login} from '@/axios/axiosDefaults'
 
 
