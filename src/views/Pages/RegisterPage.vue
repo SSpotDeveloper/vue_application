@@ -29,5 +29,5 @@
   </div>
   </template>
   <script setup>
-  import { UserIcon, LockClosedIcon, EnvelopeIcon } from '@heroicons/vue/outline';
+  import { UserIcon, LockClosedIcon, EnvelopeIcon } from '@heroicons/vue/24/outline';
   </script>

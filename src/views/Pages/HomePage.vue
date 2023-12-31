@@ -37,7 +37,7 @@
 </template>
 <script setup>
 import {ref} from 'vue';
-import { UserIcon, LockClosedIcon } from '@heroicons/vue/outline';
+import { UserIcon, LockClosedIcon } from '@heroicons/vue/24/outline';
 import {verifyServerAvailability, Login} from '@/axios/axiosDefaults'
 
 
