@@ -17,7 +17,7 @@
                                 <h1>Manie Botha</h1>
                             </div>
                             <div>
-                                <h1 class="text-sm text-slate-300 ">manie@wowsoftware.co.za</h1>
+                                <h1 class="text-sm text-slate-400 ">manie@wowsoftware.co.za</h1>
                             </div>
                         </div>
                         <div>
