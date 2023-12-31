@@ -8,12 +8,12 @@
             <div class="relative px-2 rounded-md bg-lime-300">
                 Transactions
                 <span class="absolute w-2 h-2 rounded-full -top-1 -right-1 bg-sky-600 animate-ping"></span>
-                <span class="absolute w-2 h-2 rounded-full -top-1 -right-1 bg-sky-600"></span>
+                <span class="absolute w-2 h-2 bg-red-600 rounded-full -top-1 -right-1"></span>
             </div>
             <div class="relative px-2 rounded-md bg-lime-300">
                 Notifications
                 <span class="absolute w-2 h-2 rounded-full -top-1 -right-1 bg-sky-600 animate-ping"></span>
-                <span class="absolute w-2 h-2 rounded-full -top-1 -right-1 bg-sky-600"></span>
+                <span class="absolute w-2 h-2 bg-red-600 rounded-full -top-1 -right-1"></span>
             </div>
         </div>
         <div>
