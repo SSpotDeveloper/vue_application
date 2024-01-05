@@ -1,8 +1,8 @@
 <template>
     <AuthenticatedLayoutView>
-    <!-- <Suspense>
+    <Suspense>
         <RouterView />
-    </Suspense> -->
+    </Suspense>
     </AuthenticatedLayoutView>
 </template>
 
