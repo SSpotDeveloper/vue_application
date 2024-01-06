@@ -6,6 +6,7 @@ import ProfilePageVue from '@/views/Pages/ProfilePage.vue';
 import CompanySettingsVue from '@/views/Pages/Settings/CompanySettings.vue';
 import UserSettingsVue from '@/views/Pages/Settings/UserSetings.vue';
 import DashboardPageVue from '@/views/Pages/DashboardPage.vue';
+import ClientPageVue from '@/views/Pages/ClientPage.vue';
 
 const routes = [
   {
@@ -36,6 +37,11 @@ const routes = [
     path: '/profile',
     name: 'profile',
     component: ProfilePageVue,
+  },
+  {
+    path: '/clients',
+    name: 'clients',
+    component: ClientPageVue,
   }
 ]
 

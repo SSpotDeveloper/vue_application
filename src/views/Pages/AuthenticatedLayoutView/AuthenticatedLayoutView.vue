@@ -12,14 +12,14 @@
                 <MenuButton>
                     <img src="https://logo.com/image-cdn/images/kts928pd/production/b76978004c62f2b4cb9a8dfd73448c5a63988fd2-1600x1598.png?w=1080&q=72" alt="Company Logo" class="h-6 rounded-full">
                 </MenuButton>
-                <MenuItems class="absolute right-0 flex flex-col w-48 p-1 rounded-md shadow-lg bg-lime-400">
-                    <MenuItem class="flex justify-between px-3 py-2 rounded-md hover:bg-white" :class="{ 'bg-lime-500': $route.path.includes('/settings')}">
+                <MenuItems class="absolute right-0 flex flex-col w-48 p-1 rounded-md shadow-lg bg-lime-300">
+                    <MenuItem class="flex justify-between px-3 py-2 rounded-md hover:bg-lime-400" :class="{ 'bg-lime-500': $route.path.includes('/settings')}">
                         <RouterLink to="/settings" >Settings</RouterLink>
                     </MenuItem>
-                    <MenuItem class="flex justify-between px-3 py-2 rounded-md hover:bg-white" :class="{ 'bg-lime-500': $route.path.includes('/profile')}">
+                    <MenuItem class="flex justify-between px-3 py-2 rounded-md hover:bg-lime-400" :class="{ 'bg-lime-500': $route.path.includes('/profile')}">
                         <RouterLink to="/profile" >Profile</RouterLink>
                     </MenuItem>
-                    <MenuItem class="flex justify-between px-3 py-2 rounded-md hover:bg-white" :class="{ 'bg-lime-500': $route.name === 'logout' }">
+                    <MenuItem class="flex justify-between px-3 py-2 rounded-md hover:bg-lime-400" :class="{ 'bg-lime-500': $route.name === 'logout' }">
                         <RouterLink to="/settings" >Logout</RouterLink>
                     </MenuItem>
                 </MenuItems>
@@ -29,13 +29,13 @@
             <slot />
         </div>
     </div>
-<SystemPartial />
+<!-- <SystemPartial /> -->
 </template>
 
 <script setup>
 import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue'
 import SideNavigation from './Navigation/Side-Navigation.vue';
-import SystemPartial from './Notification/SystemPartial.vue';
+// import SystemPartial from './Notification/SystemPartial.vue';
 import { Bars4Icon } from '@heroicons/vue/24/outline'
 import {ref} from 'vue';
 
