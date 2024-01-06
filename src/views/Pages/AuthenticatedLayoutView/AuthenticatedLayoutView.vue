@@ -29,12 +29,13 @@
             <slot />
         </div>
     </div>
-
+<SystemPartial />
 </template>
 
 <script setup>
 import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue'
 import SideNavigation from './Navigation/Side-Navigation.vue';
+import SystemPartial from './Notification/SystemPartial.vue';
 import { Bars4Icon } from '@heroicons/vue/24/outline'
 import {ref} from 'vue';
 

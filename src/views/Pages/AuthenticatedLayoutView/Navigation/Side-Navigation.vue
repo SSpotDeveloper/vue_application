@@ -28,16 +28,37 @@
                 </div>
                 <div class="flex-1">
                     <div class="flex flex-col">
-                        <Menu v-for="navItem, index in SideNav" :key="index" >
+                        <Menu v-for="navItem, index in MainSideNav" :key="index" >
                             <MenuButton class="p-2 mr-2 duration-200 bg-lime-300 hover:bg-lime-400 hover:mr-0 hover:shadow-lg">
                                         {{navItem.name}}
                             </MenuButton>
                             <MenuItems class="flex flex-col">
-                                <MenuItem as='a' v-for="submenu, index in navItem.sub" :key="index" href="#" class="p-2 mr-2 duration-200 bg-slate-300 hover:bg-slate-400 hover:mr-0">{{ submenu.name }}</MenuItem>
+                                    <MenuItem v-for="submenu, index in navItem.sub" :key="index" href="#" >
+                                        <RouterLink :to="submenu.to" class="p-2 mr-2 duration-200 bg-slate-300 hover:bg-slate-400 hover:mr-0">
+                                            {{ submenu.name }}
+                                        </RouterLink>
+                                    </MenuItem>
                             </MenuItems>
                         </Menu>
                     </div>
                 </div>
+                <div class="">
+                    <div class="flex flex-col">
+                        <Menu v-for="navItem, index in SubSideNav" :key="index" >
+                            <MenuButton class="p-2 mr-2 duration-200 bg-lime-300 hover:bg-lime-400 hover:mr-0 hover:shadow-lg">
+                                        {{navItem.name}}
+                            </MenuButton>
+                            <MenuItems class="flex flex-col">
+                                    <MenuItem v-for="submenu, index in navItem.sub" :key="index" href="#" >
+                                        <RouterLink :to="submenu.to" class="p-2 mr-2 duration-200 bg-slate-300 hover:bg-slate-400 hover:mr-0">
+                                            {{ submenu.name }}
+                                        </RouterLink>
+                                    </MenuItem>
+                            </MenuItems>
+                        </Menu>
+                    </div>
+                </div>
+
             </div>
         </TransitionRoot>
         <!-- <div class="flex items-center h-full text-3xl"><button @click="closeMenu" type="button" class="w-full px-2 py-1 text-xs font-semibold text-white bg-indigo-600 rounded shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Open Menu</button></div> -->
@@ -54,29 +75,57 @@
         type: Boolean,
     }
   })
-  const SideNav = [
-    {name: 'Menu', sub: [
+  const MainSideNav = [
+    {name: 'Stock', sub: [
         {
-            name: 'Menu 2'
+            name: 'Manage',
+            to: '/manage-clients',
         },
         {
-            name: 'Menu 2'
-        },
-    ]},
-    {name: 'Menu', sub: [
-        {
-            name: 'Menu 2'
-        },
-        {
-            name: 'Menu 2'
+            name: 'Menu 2',
+            to: '/manage-clients',
         },
     ]},
-    {name: 'Menu', sub: [
+    {name: 'Manufacturing', sub: [
         {
-            name: 'Menu 2'
+            name: 'Manage Manufacturing',
+            to: '/manage-clients',
         },
         {
-            name: 'Menu 2'
+            name: 'Menu 2',
+            to: '/manage-clients',
+        },
+    ]},
+    {name: 'Clients', sub: [
+        {
+            name: 'Manage Clients',
+            to: '/manage-clients',
+        },
+        {
+            name: 'Menu 2',
+            to: '/manage-clients',
+        },
+    ]},
+    {name: 'Suppliers', sub: [
+        {
+            name: 'Manage Suppliers',
+            to: '/manage-clients',
+        },
+        {
+            name: 'Menu 2',
+            to: '/manage-clients',
+        },
+    ]},
+  ]
+  const SubSideNav = [
+    {name: 'Reports', sub: [
+        {
+            name: 'Manage',
+            to: '/manage-clients',
+        },
+        {
+            name: 'Menu 2',
+            to: '/manage-clients',
         },
     ]},
   ]
