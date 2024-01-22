@@ -7,6 +7,7 @@ import CompanySettingsVue from '@/views/Pages/Settings/CompanySettings.vue';
 import UserSettingsVue from '@/views/Pages/Settings/UserSetings.vue';
 import DashboardPageVue from '@/views/Pages/DashboardPage.vue';
 import ClientPageVue from '@/views/Pages/ClientPage.vue';
+import InvoicePageVue from '@/views/Pages/Client/InvoicePage.vue';
 
 const routes = [
   {
@@ -42,6 +43,11 @@ const routes = [
     path: '/clients',
     name: 'clients',
     component: ClientPageVue,
+  },
+  {
+    path: '/invoice',
+    name: 'invoice',
+    component: InvoicePageVue
   }
 ]
 

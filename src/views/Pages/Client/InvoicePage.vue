@@ -1,10 +1,10 @@
 <template>
-    <h1 class="text-3xl font-semibold mb-6 text-center">Invoices</h1>
-   <div class="h-screen bg-gray-100">
+    <h1 class="mb-6 text-3xl font-semibold text-center">Invoices</h1>
+   <div class="bg-gray-100">
      
      <div class="p-6">
        
-       <div class="flex justify-between items-center mb-6">
+       <div class="flex items-center justify-between mb-6">
         
          <div class="flex items-center space-x-4">
            <label for="filter" class="text-sm">Filter:</label>
@@ -21,12 +21,12 @@
  
          <div class="flex space-x-4">
            <button
-             class="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-Green-600 transition duration-300"
+             class="px-4 py-2 text-white transition duration-300 bg-green-500 rounded-md hover:bg-Green-600"
            >
              Add
            </button>
            <button
-             class="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 transition duration-300"
+             class="px-4 py-2 text-white transition duration-300 bg-red-500 rounded-md hover:bg-red-600"
            >
              Delete
            </button>
@@ -42,14 +42,14 @@
          />
        </div>
  
-       <table class="w-full bg-white border-collapse overflow-hidden rounded-md shadow-lg">
+       <table class="w-full overflow-hidden bg-white border-collapse rounded-md shadow-lg">
          <thead class="bg-gray-200">
            <tr>
-             <th class="border-b p-4 text-left">Invoice Number</th>
-             <th class="border-b p-4 text-left">Customer Name</th>
-             <th class="border-b p-4 text-left">Amount</th>
-             <th class="border-b p-4 text-left">Date</th>
-             <th class="border-b p-4 text-left">Actions</th>
+             <th class="p-4 text-left border-b">Invoice Number</th>
+             <th class="p-4 text-left border-b">Customer Name</th>
+             <th class="p-4 text-left border-b">Amount</th>
+             <th class="p-4 text-left border-b">Date</th>
+             <th class="p-4 text-left border-b">Actions</th>
            </tr>
          </thead>
  
@@ -58,15 +58,15 @@
            <tr
              v-for="invoice in invoices"
              :key="invoice.id"
-             class="hover:bg-gray-100 transition duration-300"
+             class="transition duration-300 hover:bg-gray-100"
            >
-             <td class="border-b p-4">{{ invoice.invoiceNumber }}</td>
-             <td class="border-b p-4">{{ invoice.customerName }}</td>
-             <td class="border-b p-4">{{ invoice.amount }}</td>
-             <td class="border-b p-4">{{ invoice.date }}</td>
-             <td class="border-b p-4">
+             <td class="p-4 border-b">{{ invoice.invoiceNumber }}</td>
+             <td class="p-4 border-b">{{ invoice.customerName }}</td>
+             <td class="p-4 border-b">{{ invoice.amount }}</td>
+             <td class="p-4 border-b">{{ invoice.date }}</td>
+             <td class="p-4 border-b">
                <button
-                 class="bg-yellow-500 text-white px-4 py-2 rounded-md hover:bg-yellow-600 transition duration-300"
+                 class="px-4 py-2 text-white transition duration-300 bg-yellow-500 rounded-md hover:bg-yellow-600"
                >
                  Edit
                </button>

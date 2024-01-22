@@ -57,6 +57,7 @@ const navigation = [
     { name: 'Stock', to: '/stock' },
     { name: 'Orders', to: '/orders' },
     { name: 'Clients', to: '/clients' },
+    {name: 'Invoicing', to: '/invoice'},
     { name: 'Suppliers', to: '/suppliers' },
     { name: 'Report', to: '/reports' },
 ]
