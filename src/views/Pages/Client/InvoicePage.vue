@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
     <h1 class="mb-6 text-3xl font-semibold text-center">Invoices</h1>
    <div class="bg-gray-100">
      
@@ -77,15 +77,136 @@
        </table>
      </div>
    </div>
- </template>
- 
- <script setup>
- import { ref } from 'vue';
- 
- const invoices = ref([
-   { id: 1, invoiceNumber: 'INV001', customerName: 'Erich Lorenz', amount: 100.0, date: '2023-01-01' },
-   { id: 2, invoiceNumber: 'INV002', customerName: 'Erich Lorenz', amount: 150.0, date: '2023-01-02' },
-   { id: 3, invoiceNumber: 'INV003', customerName: 'Erich Lorenz', amount: 200.0, date: '2023-01-03' },
+ </template> -->
+ <template>
+  <div class="p-5 md:p-2">
+    <h1 class="text-lg text-center">Invoices</h1>
+  </div>
+  <div class="p-2">
+    <div class="flex justify-between">
+      <div>
+        <div class="my-2">
+          <div>
+            <h1 class="p-2">Filter</h1>
+          </div>
+          <div class="flex space-x-1">
+            <div>
+              <div>
+                <label for="type">Type</label>
+              </div>
+              <select v-model="selected" class="p-2 border rounded-md border-slate-300">
+                <option value="All" selected>All</option>
+                <option value="Paid">Paid</option>
+                <option value="Unpaid">Unpaid</option>
+              </select>
+            </div>
+            <div>
+              <div>
+                <label for="year">Year</label>
+              </div>
+              <input type="number" min="1900" max="2099" step="1" value="2024" class="p-1.5 border rounded-md border-slate-300" />
+            </div>
+            <div>
+              <div>
+                <label for="month">Month</label>
+              </div>
+              <select class="p-2 border rounded-md border-slate-300">
+                <option value="January">January</option>
+                <option value="February">February</option>
+                <option value="March">March</option>
+                <option value="April">April</option>
+                <option value="May">May</option>
+                <option value="June">June</option>
+                <option value="July">July</option>
+                <option value="August">August</option>
+                <option value="September">September</option>
+                <option value="October">October</option>
+                <option value="November">November</option>
+                <option value="December">December</option>
+              </select>
+            </div>
+            <div>
+              <div>
+                <label for="search">Search</label>
+              </div>
+              <input type="text" class="p-1.5 border rounded-md border-slate-300" placeholder="Invoice Number">
+            </div>
+          </div>
+          <div>
+
+          </div>
+
+        </div>
+      </div>
+      <div>
+        <button class="p-2 duration-150 rounded-md bg-lime-500 hover:bg-lime-400">Add New Invoice</button>
+      </div>
+    </div>
+    <div>
+      <table class="w-full shadow-lg">
+        <thead class=" bg-lime-300">
+          <tr >
+            <th class="py-2">
+              Invoice Number
+            </th>
+            <th>
+              Customer Name
+            </th>
+            <th>
+              Date
+            </th>
+            <th>
+              Amount
+            </th>
+            <th>
+              Status
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="invoice, index in filteredInvoices" :key="index" class="text-center border-y border-slate-300" :class="{'bg-red-100' : invoice.status === 'Unpaid', 'bg-green-100' : invoice.status === 'Paid'}"  v-show="selected === 'All' || invoice.status === selected">
+            <td class="px-1 py-2">{{invoice.invoiceNumber}}</td>
+            <td>{{invoice.customerName}}</td>
+            <td>{{invoice.date}}</td>
+            <td>{{invoice.amount}}</td>
+            <td>{{invoice.status}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</template>
+
+<script setup>
+import { ref, computed } from 'vue';
+
+const selected = ref('All');
+const invoices = ref([
+   { id: 1, invoiceNumber: 'INV001', customerName: 'Erich Lorenz', amount: 100.0, date: '2020-01-01', status: 'Paid' },
+   { id: 2, invoiceNumber: 'INV002', customerName: 'Erich Lorenz', amount: 150.0, date: '2023-01-02', status: 'Paid' },
+   { id: 3, invoiceNumber: 'INV003', customerName: 'Erich Lorenz', amount: 200.0, date: '2023-01-03', status: 'Unpaid' },
+   { id: 1, invoiceNumber: 'INV001', customerName: 'Erich Lorenz', amount: 100.0, date: '2023-01-01', status: 'Paid' },
+   { id: 2, invoiceNumber: 'INV002', customerName: 'Erich Lorenz', amount: 150.0, date: '2023-01-02', status: 'Paid' },
+   { id: 3, invoiceNumber: 'INV003', customerName: 'Erich Lorenz', amount: 200.0, date: '2015-01-03', status: 'Unpaid' },
+   { id: 1, invoiceNumber: 'INV001', customerName: 'Erich Lorenz', amount: 100.0, date: '2023-01-01', status: 'Paid' },
+   { id: 2, invoiceNumber: 'INV002', customerName: 'Erich Lorenz', amount: 150.0, date: '2023-01-02', status: 'Paid' },
+   { id: 3, invoiceNumber: 'INV003', customerName: 'Erich Lorenz', amount: 200.0, date: '2023-01-03', status: 'Unpaid' },
+   { id: 1, invoiceNumber: 'INV001', customerName: 'Erich Lorenz', amount: 100.0, date: '2023-01-01', status: 'Paid' },
+   { id: 2, invoiceNumber: 'INV002', customerName: 'Erich Lorenz', amount: 150.0, date: '2023-01-02', status: 'Paid' },
+   { id: 3, invoiceNumber: 'INV003', customerName: 'Erich Lorenz', amount: 200.0, date: '2023-01-03', status: 'Unpaid' },
   
- ]);
- </script>
+]);
+
+const filter = (status) => {
+  if (selected.value === 'All') {
+    return true;
+  } else if (status === selected.value) {
+    return true;
+  } else {
+    return false;
+  }
+}
+const filteredInvoices = computed(() => {
+  return invoices.value.filter(invoice => filter(invoice.status));
+})
+</script>
