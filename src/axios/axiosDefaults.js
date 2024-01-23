@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-axios.defaults.baseURL = 'https://shadowdragon.azurewebsites.net';
+axios.defaults.baseURL = 'https://laraveldragon.azurewebsites.net';
 axios.defaults.withCredentials = true;
 axios.defaults.withXSRFToken = true;
 

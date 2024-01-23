@@ -132,10 +132,6 @@
               <input type="text" class="p-1.5 border rounded-md border-slate-300" placeholder="Invoice Number">
             </div>
           </div>
-          <div>
-
-          </div>
-
         </div>
       </div>
       <div>
@@ -164,11 +160,11 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="invoice, index in filteredInvoices" :key="index" class="text-center border-y border-slate-300" :class="{'bg-red-100' : invoice.status === 'Unpaid', 'bg-green-100' : invoice.status === 'Paid'}"  v-show="selected === 'All' || invoice.status === selected">
+          <tr v-for="invoice, index in filteredInvoices" :key="index" class="text-center border-y border-slate-300 hover:bg-slate-300" :class="{'bg-red-100' : invoice.status === 'Unpaid', 'bg-green-100' : invoice.status === 'Paid'}"  v-show="selected === 'All' || invoice.status === selected">
             <td class="px-1 py-2">{{invoice.invoiceNumber}}</td>
             <td>{{invoice.customerName}}</td>
             <td>{{invoice.date}}</td>
-            <td>{{invoice.amount}}</td>
+            <td>R {{invoice.amount}}</td>
             <td>{{invoice.status}}</td>
           </tr>
         </tbody>
@@ -178,24 +174,11 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue';
+import axios from 'axios';
+import { ref, computed, onMounted } from 'vue';
 
 const selected = ref('All');
-const invoices = ref([
-   { id: 1, invoiceNumber: 'INV001', customerName: 'Erich Lorenz', amount: 100.0, date: '2020-01-01', status: 'Paid' },
-   { id: 2, invoiceNumber: 'INV002', customerName: 'Erich Lorenz', amount: 150.0, date: '2023-01-02', status: 'Paid' },
-   { id: 3, invoiceNumber: 'INV003', customerName: 'Erich Lorenz', amount: 200.0, date: '2023-01-03', status: 'Unpaid' },
-   { id: 1, invoiceNumber: 'INV001', customerName: 'Erich Lorenz', amount: 100.0, date: '2023-01-01', status: 'Paid' },
-   { id: 2, invoiceNumber: 'INV002', customerName: 'Erich Lorenz', amount: 150.0, date: '2023-01-02', status: 'Paid' },
-   { id: 3, invoiceNumber: 'INV003', customerName: 'Erich Lorenz', amount: 200.0, date: '2015-01-03', status: 'Unpaid' },
-   { id: 1, invoiceNumber: 'INV001', customerName: 'Erich Lorenz', amount: 100.0, date: '2023-01-01', status: 'Paid' },
-   { id: 2, invoiceNumber: 'INV002', customerName: 'Erich Lorenz', amount: 150.0, date: '2023-01-02', status: 'Paid' },
-   { id: 3, invoiceNumber: 'INV003', customerName: 'Erich Lorenz', amount: 200.0, date: '2023-01-03', status: 'Unpaid' },
-   { id: 1, invoiceNumber: 'INV001', customerName: 'Erich Lorenz', amount: 100.0, date: '2023-01-01', status: 'Paid' },
-   { id: 2, invoiceNumber: 'INV002', customerName: 'Erich Lorenz', amount: 150.0, date: '2023-01-02', status: 'Paid' },
-   { id: 3, invoiceNumber: 'INV003', customerName: 'Erich Lorenz', amount: 200.0, date: '2023-01-03', status: 'Unpaid' },
-  
-]);
+const invoices = ref([]);
 
 const filter = (status) => {
   if (selected.value === 'All') {
@@ -205,8 +188,26 @@ const filter = (status) => {
   } else {
     return false;
   }
-}
+};
+
 const filteredInvoices = computed(() => {
-  return invoices.value.filter(invoice => filter(invoice.status));
-})
+  if (invoices.value) {
+    return invoices.value.filter((invoice) => filter(invoice.status));
+  }
+  return false;
+});
+
+const getInvoices = async () => {
+  try {
+    const response = await axios.get('/api/invoice');
+    invoices.value = response.data;
+  } catch (error) {
+    console.error('Error fetching invoices:', error);
+  }
+};
+
+// Use onMounted to fetch invoices when the component is mounted
+onMounted(() => {
+  getInvoices();
+});
 </script>
