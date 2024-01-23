@@ -168,8 +168,8 @@
 </template>
 
 <script setup>
-import axios from 'axios';
-import { ref, computed, onMounted } from 'vue';
+// import axios from 'axios';
+import { ref, computed} from 'vue';
 
 const selected = ref('All');
 const selectedYear = ref('All');
@@ -212,6 +212,6 @@ const filter = (invoice) => {
 };
 
 const filteredInvoices = computed(() => {
-  return invoices.value.filter(invoice => filter(invoice.status));
+  return invoices.value.filter(invoice => filter(invoice));
 })
 </script>
