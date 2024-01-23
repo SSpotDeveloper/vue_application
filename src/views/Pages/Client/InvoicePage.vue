@@ -104,13 +104,17 @@
               <div>
                 <label for="year">Year</label>
               </div>
-              <input type="number" min="1900" max="2099" step="1" value="2024" class="p-1.5 border rounded-md border-slate-300" />
+              <select v-model="selectedYear" class="p-2 border rounded-md border-slate-300">
+                <option value="All" selected>Select All Years</option>
+                <option v-for="year in uniqueYears" :key="year" :value="year">{{ year }}</option>
+              </select>
             </div>
             <div>
               <div>
                 <label for="month">Month</label>
               </div>
-              <select class="p-2 border rounded-md border-slate-300">
+              <select v-model="selectedMonth" class="p-2 border rounded-md border-slate-300">
+                <option value="All" selected>All</option>
                 <option value="January">January</option>
                 <option value="February">February</option>
                 <option value="March">March</option>
@@ -129,7 +133,7 @@
               <div>
                 <label for="search">Search</label>
               </div>
-              <input type="text" class="p-1.5 border rounded-md border-slate-300" placeholder="Invoice Number">
+              <input v-model="searchTerm" type="text" class="p-1.5 border rounded-md border-slate-300" placeholder="Invoice Number">
             </div>
           </div>
         </div>
@@ -140,27 +144,17 @@
     </div>
     <div>
       <table class="w-full shadow-lg">
-        <thead class=" bg-lime-300">
-          <tr >
-            <th class="py-2">
-              Invoice Number
-            </th>
-            <th>
-              Customer Name
-            </th>
-            <th>
-              Date
-            </th>
-            <th>
-              Amount
-            </th>
-            <th>
-              Status
-            </th>
+        <thead class="bg-lime-300">
+          <tr>
+            <th class="py-2">Invoice Number</th>
+            <th>Customer Name</th>
+            <th>Date</th>
+            <th>Amount</th>
+            <th>Status</th>
           </tr>
         </thead>
         <tbody>
-          <tr v-for="invoice, index in filteredInvoices" :key="index" class="text-center border-y border-slate-300 hover:bg-slate-300" :class="{'bg-red-100' : invoice.status === 'Unpaid', 'bg-green-100' : invoice.status === 'Paid'}"  v-show="selected === 'All' || invoice.status === selected">
+          <tr v-for="invoice, index in filteredInvoices" :key="index" class="text-center border-y border-slate-300 hover:bg-slate-300" :class="{'bg-red-100' : invoice.status === 'Unpaid', 'bg-green-100' : invoice.status === 'Paid'}">
             <td class="px-1 py-2">{{invoice.invoiceNumber}}</td>
             <td>{{invoice.customerName}}</td>
             <td>{{invoice.date}}</td>
@@ -178,36 +172,46 @@ import axios from 'axios';
 import { ref, computed, onMounted } from 'vue';
 
 const selected = ref('All');
-const invoices = ref([]);
+const selectedYear = ref('All');
+const selectedMonth = ref('All');
+const searchTerm = ref('');
 
-const filter = (status) => {
-  if (selected.value === 'All') {
-    return true;
-  } else if (status === selected.value) {
-    return true;
-  } else {
-    return false;
-  }
+const invoices = ref([
+   { id: 1, invoiceNumber: 'INV001', customerName: 'Erich Lorenz', amount: 100.0, date: '2020-01-01', status: 'Paid' },
+   { id: 2, invoiceNumber: 'INV002', customerName: 'Erich Lorenz', amount: 150.0, date: '2023-01-02', status: 'Paid' },
+   { id: 3, invoiceNumber: 'INV003', customerName: 'Erich Lorenz', amount: 200.0, date: '2023-01-03', status: 'Unpaid' },
+   { id: 1, invoiceNumber: 'INV001', customerName: 'Erich Lorenz', amount: 100.0, date: '2023-01-01', status: 'Paid' },
+   { id: 2, invoiceNumber: 'INV002', customerName: 'Erich Lorenz', amount: 150.0, date: '2023-01-02', status: 'Paid' },
+   { id: 3, invoiceNumber: 'INV003', customerName: 'Erich Lorenz', amount: 200.0, date: '2015-01-03', status: 'Unpaid' },
+   { id: 1, invoiceNumber: 'INV001', customerName: 'Erich Lorenz', amount: 100.0, date: '2023-01-01', status: 'Paid' },
+   { id: 2, invoiceNumber: 'INV002', customerName: 'Erich Lorenz', amount: 150.0, date: '2023-01-02', status: 'Paid' },
+   { id: 3, invoiceNumber: 'INV003', customerName: 'Erich Lorenz', amount: 200.0, date: '2023-01-03', status: 'Unpaid' },
+   { id: 1, invoiceNumber: 'INV001', customerName: 'Erich Lorenz', amount: 100.0, date: '2023-01-01', status: 'Paid' },
+   { id: 2, invoiceNumber: 'INV002', customerName: 'Erich Lorenz', amount: 150.0, date: '2023-01-02', status: 'Paid' },
+   { id: 3, invoiceNumber: 'INV003', customerName: 'Erich Lorenz', amount: 200.0, date: '2023-01-03', status: 'Unpaid' },
+  
+]);
+
+
+const uniqueYears = computed(() => {
+  const years = new Set();
+  invoices.value.forEach(invoice => {
+    const year = new Date(invoice.date).getFullYear();
+    years.add(year);
+  });
+  return ['All', ...Array.from(years)];
+});
+
+const filter = (invoice) => {
+  const statusFilter = selected.value === 'All' || invoice.status === selected.value;
+  const yearFilter = selectedYear.value === 'All' || (selectedYear.value === 'Select All Years' ? true : new Date(invoice.date).getFullYear() === parseInt(selectedYear.value));
+  const monthFilter = selectedMonth.value === 'All' || new Date(invoice.date).toLocaleString('default', { month: 'long' }) === selectedMonth.value;
+  const searchFilter = !searchTerm.value || invoice.invoiceNumber.toLowerCase().includes(searchTerm.value.toLowerCase());
+
+  return statusFilter && yearFilter && monthFilter && searchFilter;
 };
 
 const filteredInvoices = computed(() => {
-  if (invoices.value) {
-    return invoices.value.filter((invoice) => filter(invoice.status));
-  }
-  return false;
-});
-
-const getInvoices = async () => {
-  try {
-    const response = await axios.get('/api/invoice');
-    invoices.value = response.data;
-  } catch (error) {
-    console.error('Error fetching invoices:', error);
-  }
-};
-
-// Use onMounted to fetch invoices when the component is mounted
-onMounted(() => {
-  getInvoices();
-});
+  return invoices.value.filter(invoice => filter(invoice.status));
+})
 </script>
