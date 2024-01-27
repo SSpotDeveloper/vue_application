@@ -1,12 +1,17 @@
 <template>
-    <AuthenticatedLayoutView>
-    <Suspense>
-        <RouterView />
-    </Suspense>
+    <AuthenticatedLayoutView v-if="Authenticated">
+        <Suspense>
+            <RouterView />
+        </Suspense>
     </AuthenticatedLayoutView>
+    <RouterView v-else />
 </template>
 
 
+
 <script setup>
-import AuthenticatedLayoutView from '@/views/Pages/AuthenticatedLayoutView/AuthenticatedLayoutView.vue';
+import {computed} from 'vue';
+import store from '@/store';
+import AuthenticatedLayoutView from '@/views/Pages/AuthenticatedLayoutView/AuthenticatedLayoutView.vue'
+const Authenticated = computed(() => store.getters.getFakeAuthenticatedState);
 </script>

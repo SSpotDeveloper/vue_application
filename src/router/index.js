@@ -1,5 +1,5 @@
 import { createRouter, createWebHashHistory, } from 'vue-router'
-// import HomePageVue from '@/views/Pages/HomePage.vue'
+import HomePageVue from '@/views/Pages/HomePage.vue'
 import RegisterPage from '@/views/Pages/RegisterPage.vue';
 import SettingsPageVue from '@/views/Pages/SettingsPage.vue';
 import ProfilePageVue from '@/views/Pages/ProfilePage.vue';
@@ -12,12 +12,17 @@ import InvoicePageVue from '@/views/Pages/Client/InvoicePage.vue';
 const routes = [
   {
     path: '/',
-    name: 'Dashboard',
-    component: DashboardPageVue,
+    name: 'Home',
+    component: HomePageVue,
   },
   { path: '/register',
     name: 'register', 
     component: RegisterPage 
+  },
+  {
+    path: '/dashboard',
+    name: 'Dashboard',
+    component: DashboardPageVue,
   },
   {
     path: '/settings',
