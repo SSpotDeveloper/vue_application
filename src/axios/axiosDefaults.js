@@ -37,12 +37,14 @@ const Login = (data) => {
     .then(() => {})
     .catch((err) => console.log(err))
 }
-
 const Register = (data) => {
     createUserWithEmailAndPassword(auth, data.email, data.password)
     .then((res) => console.log(res))
     .catch((err) => console.log(err))
 }
+const RegisterEmployee = (data) => {
+    console.log(data)
+}
 
 
-export { Login, Register, SignOut }
+export { Login, Register, SignOut, RegisterEmployee }
