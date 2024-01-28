@@ -41,6 +41,6 @@
   })
   const response = ref();
   const registerUser = () => {
-    response.value = Register(data.value.email, data.value.password)
+    response.value = Register(data.value)
   }
   </script>

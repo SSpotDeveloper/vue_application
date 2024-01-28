@@ -16,7 +16,6 @@ export default createStore({
         refresheToken: '',
         tokenType: '',
       }
-
     }
   },
   getters: {

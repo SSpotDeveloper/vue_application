@@ -20,7 +20,7 @@
                         <RouterLink to="/profile" >Profile</RouterLink>
                     </MenuItem>
                     <MenuItem class="flex justify-between px-3 py-2 rounded-md hover:bg-lime-400" :class="{ 'bg-lime-500': $route.name === 'logout' }">
-                        <RouterLink to="/settings" >Logout</RouterLink>
+                        <button @click="SignOut()">Logout</button>
                     </MenuItem>
                 </MenuItems>
             </Menu>
@@ -38,6 +38,7 @@ import SideNavigation from './Navigation/Side-Navigation.vue';
 // import SystemPartial from './Notification/SystemPartial.vue';
 import { Bars4Icon } from '@heroicons/vue/24/outline'
 import {ref} from 'vue';
+import {SignOut} from '@/axios/axiosDefaults'
 
 
 const sideNavigation = ref(false)

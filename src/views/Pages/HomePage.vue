@@ -1,8 +1,8 @@
 <template>
-    <div class="home-background p-5">
+    <div class="p-5 home-background">
         <!-- Mobile Login -->
-        <div class="sm:hidden flex justify-center items-center w-full h-full">
-            <div class="bg-white w-full rounded-lg p-5">
+        <div class="flex items-center justify-center w-full h-full sm:hidden">
+            <div class="w-full p-5 bg-white rounded-lg">
                 <div class="my-1">
                     <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email</label>
                     <div class="mt-2">
@@ -22,8 +22,8 @@
             </div>
         </div>
         <!-- Tablet And Desktop Login  -->
-        <div class="flex justify-center items-center h-full">
-            <div class="bg-white p-5 rounded-lg w-1/2 md:w-1/3">
+        <div class="flex items-center justify-center h-full">
+            <div class="w-1/2 p-5 bg-white rounded-lg md:w-1/3">
                 <div class="my-1">
                     <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email</label>
                     <div class="mt-2">
@@ -39,12 +39,15 @@
                 <div class="my-3 text-center">
                     <button @click="Login(data)" type="button" class="rounded-full bg-green-600 px-3.5 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600">Login</button>
                 </div>
+                <div>
+                    <h1>Not yet registered? <RouterLink to="/register" class="text-green-600">Register</RouterLink></h1>
+                </div>
             </div>
         </div>
     </div>
 </template>
 <script setup>
-import {ref} from 'vue';
+import { ref } from 'vue';
 import { Login } from '@/axios/axiosDefaults';
 
 const data = ref({
